@@ -1,21 +1,20 @@
 package linte.counter.service.Impl;
 
 import linte.counter.model.Counter;
-import linte.counter.model.CounterRepository;
+import linte.counter.model.CounterRepositoryImpl;
 import linte.counter.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class CounterServiceImpl implements CounterService {
-    private CounterRepository repository;
+    private CounterRepositoryImpl repository;
 
     @Autowired
-    public CounterServiceImpl(CounterRepository repository) {
+    public CounterServiceImpl(CounterRepositoryImpl repository) {
         this.repository = repository;
     }
 
@@ -62,17 +61,16 @@ public class CounterServiceImpl implements CounterService {
 
     @Override
     public String getTotalValue() {
-        ConcurrentHashMap<String, Counter> snapshot = repository.getCounters();
+        Collection<Counter> snapshot = repository.getCounters();
         Long totalCount = 0L;
-        for (String name : snapshot.keySet()){
-            totalCount += snapshot.get(name).getValue();
+        for (Counter counter : snapshot){
+            totalCount += counter.getValue();
         }
         return String.valueOf(totalCount);
     }
 
     @Override
     public List<String> list() {
-        ConcurrentHashMap<String, Counter> snapshot = repository.getCounters();
-        return Collections.list(snapshot.keys());
+        return repository.getCounterNames();
     }
 }

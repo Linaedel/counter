@@ -1,44 +1,58 @@
 package linte.counter.model;
 
-import org.springframework.stereotype.Component;
+import java.util.Collection;
+import java.util.List;
 
-import java.util.concurrent.ConcurrentHashMap;
+public interface CounterRepository {
 
+    /**
+     * Проверить наличие счётчика по имени.
+     *
+     * @param name - имя счётчика
+     * @return Возвращает true при наличии счётчика с переданным именем.
+     */
+     boolean exists(String name);
 
-/**
- * Некий аналог DAO, обеспечивающий работу с "репозиторием", в котором хранятся значения.
- * UPD: Перераспределил функционал между мапой и сервисом для разграничения ответственности.
- */
-@Component
-public class CounterRepository {
-    private ConcurrentHashMap<String,Counter> counterMap;
+    /**
+     * Добавить счётчик в репозиторий.
+     *
+     * @param counter - добавляемый счётчик
+     */
+     void addCounter(Counter counter);
 
-    public CounterRepository() {
-        this.counterMap = new ConcurrentHashMap<>();
-    }
+    /**
+     * Обновить состояние счётчика в репозитории.
+     *
+     * @param counter - обновляемый счётчик
+     */
+     void updateCounter(Counter counter);
 
-    public boolean exists(String name){
-        return this.counterMap.containsKey(name);
-    }
+    /**
+     * Получить счётчик из репозитория.
+     *
+     * @param name - имя запрашиваемого счётчика
+     * @return Возвращает запрашиваемый счётчик.
+     */
+     Counter getCounter(String name);
 
-    public void addCounter(Counter counter){
-        this.counterMap.put(counter.getName(),counter);
-    }
+    /**
+     * Удалить счётчик из репозитория.
+     *
+     * @param name - имя удаляемого счётчика
+     */
+     void deleteCounter(String name);
 
-    public void updateCounter(Counter counter) {
-        this.counterMap.replace(counter.getName(),counter);
-    }
+    /**
+     * Получить коллекцию всех счётчиков.
+     *
+     * @return Возвращает снэпшот-коллекцию всех счётчиков, существующих в данный момент на сервисе
+     */
+     Collection<Counter> getCounters();
 
-    public Counter getCounter(String name){
-        return this.counterMap.get(name);
-    }
-
-    public void deleteCounter(String name){
-        this.counterMap.remove(name);
-    }
-
-    public ConcurrentHashMap<String,Counter> getCounters(){
-        return new ConcurrentHashMap<>(this.counterMap);
-    }
-
+    /**
+     * Получить список названий всех счётчиков.
+     *
+     * @return Возвращает список названий всех счётчиков, существующих в данный момент на сервисе
+     */
+     List<String> getCounterNames();
 }
