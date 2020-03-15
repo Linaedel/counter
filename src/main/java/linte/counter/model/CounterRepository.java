@@ -6,6 +6,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+
+/**
+ * Некий аналог DAO (правда, не реализующий принцип Single Responsibility, поскольку занимается и управлением
+ * жизненным циклом самих Counter).
+ * Введён для того, чтобы провести границу между Service- и Data-слоями приложения.
+ * С практической точки зрения не более необходим в данном приложении, чем сам Counter, может быть заменён использованием
+ * мапы в составе сервиса, что, однако, переложит на неё ещё и задачи "хранения" данных, нарушая уже упомянутый принцип.
+ */
 @Component
 public class CounterRepository {
     private ConcurrentHashMap<String,Counter> counterMap;

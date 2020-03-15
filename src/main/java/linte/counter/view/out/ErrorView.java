@@ -2,6 +2,9 @@ package linte.counter.view.out;
 
 import java.io.Serializable;
 
+/**
+ * Обёртка для возвращения сообщений об ошибках в произвольном формате
+ */
 public class ErrorView implements Serializable {
     private String error;
 

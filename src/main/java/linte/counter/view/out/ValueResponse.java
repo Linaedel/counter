@@ -1,5 +1,9 @@
 package linte.counter.view.out;
 
+/**
+ * Обёртка для возвращения значений счётчиков
+ * (формат ответа не оговорён, исправить проще, чем писать с нуля)
+ */
 public class ValueResponse {
     private String value;
 
