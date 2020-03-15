@@ -1,6 +1,8 @@
-package linte.counter.view.general;
+package linte.counter.view.out;
 
-public class ErrorView extends ResponseView {
+import java.io.Serializable;
+
+public class ErrorView implements Serializable {
     private String error;
 
     public ErrorView(String error) {

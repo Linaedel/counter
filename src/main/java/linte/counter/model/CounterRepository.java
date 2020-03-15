@@ -33,7 +33,7 @@ public class CounterRepository {
     }
 
     public String getCounterValue(String name) {
-        String counterValue = "COUNTER_NOT_EXIST";
+        String counterValue = "";
         if (counterMap.containsKey(name)) {
             counterValue = String.valueOf(this.counterMap.get(name).getValue());
         }

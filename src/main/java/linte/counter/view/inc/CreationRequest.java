@@ -1,7 +1,7 @@
-package linte.counter.view.incoming;
+package linte.counter.view.inc;
 
 public class CreationRequest {
-    public String name;
+    private String name;
 
     public CreationRequest() {
     }

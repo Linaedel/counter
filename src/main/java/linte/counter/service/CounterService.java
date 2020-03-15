@@ -1,12 +1,12 @@
 package linte.counter.service;
 
-import linte.counter.view.general.ResponseView;
+import java.util.List;
 
 public interface CounterService {
-    ResponseView create(String name);
-    ResponseView increment(String name);
-    ResponseView getValue(String name);
-    ResponseView delete(String name);
-    ResponseView getTotalValue();
-    ResponseView list();
+    boolean create(String name);
+    boolean increment(String name);
+    String getValue(String name);
+    boolean delete(String name);
+    String getTotalValue();
+    List<String> list();
 }
